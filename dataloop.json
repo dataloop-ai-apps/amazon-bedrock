@@ -1,0 +1,150 @@
+{
+  "name": "amazon-titan-text-g1-express",
+  "displayName": "Amazon Titan Text G1 - Express",
+  "version": "0.0.7",
+  "scope": "project",
+  "description": "Amazon Bedrock - Titan Text G1 Express Application. This app provide accesses to AWS client and getting response from Titan Text G1 Express model using your keys",
+  "attributes": {
+    "Provider": "AWS",
+    "Category": "Model",
+    "NLP": "Conversational",
+    "Gen AI": "LLM",
+    "Media Type": "Text"
+  },
+  "components": {
+    "computeConfigs": [
+      {
+        "name": "amazon-titan-text-service",
+        "runtime": {
+          "podType": "regular-s",
+          "concurrency": 1,
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 1,
+            "queueLength": 100
+          }
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "amazon-titan-text-module",
+        "entryPoint": "models/titan/titan-adapter.py",
+        "className": "ModelAdapter",
+        "computeConfig": "amazon-titan-text-service",
+        "description": "Amazon Titan Text Module",
+        "initInputs": [
+          {
+            "type": "Model",
+            "name": "model_entity"
+          },
+          {
+            "type": "String",
+            "name": "integration_name"
+          }
+        ],
+        "functions": [
+          {
+            "name": "evaluate_model",
+            "input": [
+              {
+                "type": "Model",
+                "name": "model",
+                "description": "Dataloop Model Entity"
+              },
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "Dataloop Dataset Entity"
+              },
+              {
+                "type": "Json",
+                "name": "filters",
+                "description": "Dataloop Filter DQL"
+              }
+            ],
+            "output": [
+              {
+                "type": "Model",
+                "name": "model",
+                "description": "Dataloop Model Entity"
+              },
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "Dataloop Dataset Entity"
+              }
+            ],
+            "displayName": "Evaluate a Model",
+            "displayIcon": "",
+            "description": "Function to evaluate YoloX model performance"
+          },
+          {
+            "name": "predict_items",
+            "input": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "List of items to run inference on"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "The same input images for prediction."
+              },
+              {
+                "type": "Annotation[]",
+                "name": "annotations",
+                "description": "The predicted annotations."
+              }
+            ],
+            "displayName": "Predict Items",
+            "displayIcon": "",
+            "description": "Function to run YoloX inference on items"
+          },
+          {
+            "name": "predict_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": ""
+              },
+              {
+                "type": "Json",
+                "name": "filters",
+                "description": "Dataloop Filter DQL"
+              }
+            ],
+            "output": [
+            ],
+            "displayName": "Predict Dataset",
+            "displayIcon": "",
+            "description": "Function to run YoloX inference on a dataset"
+          }
+        ]
+      }
+    ],
+    "models": [
+      {
+        "name": "amazon-titan-text-express",
+        "moduleName": "amazon-titan-text-module",
+        "scope": "project",
+        "status": "pre-trained",
+        "configuration": {
+          "model_id": "amazon.titan-text-express-v1"
+        },
+        "supportedMethods": {
+          "load": true,
+          "predict": true,
+          "train": false,
+          "evaluate": true
+        },
+        "description": "Amazon Bedrock Titan Text is an advanced NLP service offered by AWS. It provides users with the capability to generate high-quality text using cutting-edge language models."
+      }
+    ]
+  }
+}
