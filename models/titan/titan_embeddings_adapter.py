@@ -10,8 +10,7 @@ logger = logging.getLogger('ModelAdapter')
 
 @dl.Package.decorators.module(description='Model Adapter for Amazon Titan Embeddings',
                               name='model-adapter',
-                              init_inputs={'model_entity': dl.Model,
-                                           'integration_name': "String"})
+                              init_inputs={'model_entity': dl.Model})
 class ModelAdapter(dl.BaseModelAdapter):
 
     def load(self, local_path, **kwargs):

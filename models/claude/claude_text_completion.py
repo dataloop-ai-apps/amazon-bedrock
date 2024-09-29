@@ -10,8 +10,7 @@ logger = logging.getLogger('ModelAdapter')
 
 @dl.Package.decorators.module(description='Model Adapter for Claude Models',
                               name='model-adapter',
-                              init_inputs={'model_entity': dl.Model,
-                                           'integration_name': "String"})
+                              init_inputs={'model_entity': dl.Model})
 class ModelAdapter(dl.BaseModelAdapter):
 
     def load(self, local_path, **kwargs):
@@ -19,17 +18,13 @@ class ModelAdapter(dl.BaseModelAdapter):
         if aws_credentials is None:
             raise ValueError("Cannot find integrations for AWS")
 
-        # decoded_bytes = base64.b64decode(aws_credentials)
-        # aws_credentials = decoded_bytes.decode("utf-8")
-        # aws_credentials = json.loads(aws_credentials)
-
-        # TODO: FOR LOCAL TESTING
-        with open(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), 'aws-credentials.json')) as f:
-            aws_credentials = json.load(f)
-
+        decoded_bytes = base64.b64decode(aws_credentials)
+        aws_credentials = decoded_bytes.decode("utf-8")
+        aws_credentials = json.loads(aws_credentials)
         logger.info("Loaded integrations")
-        self.model_id = self.configuration.get("model_id", "anthropic.claude-v2")  # TODO: REMOVE DEFAULT
-        region = self.configuration.get("region", "eu-central-1")  # TODO: REMOVE DEFAULT
+
+        self.model_id = self.configuration.get("model_id")
+        region = self.configuration.get("region")
         if region is "":
             raise ValueError("You must provide integrations on the model's configuration.")
 
@@ -130,12 +125,3 @@ class ModelAdapter(dl.BaseModelAdapter):
         input_text = f"\n\n{conversation_history}\n\nAssistant:"
 
         return input_text
-
-
-if __name__ == '__main__':
-    dl.setenv("rc")
-    item = dl.items.get(item_id="66f00d597368dff901344499")
-    model = dl.models.get(model_id="66f2c541f70f5e358a65f2a6")
-
-    adapter = ModelAdapter(model)
-    adapter.predict_items([item])

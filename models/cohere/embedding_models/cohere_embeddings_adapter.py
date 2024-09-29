@@ -8,10 +8,9 @@ import os
 logger = logging.getLogger('ModelAdapter')
 
 
-@dl.Package.decorators.module(description='Model Adapter for Amazon Titan Embeddings',
+@dl.Package.decorators.module(description='Model Adapter for Cohere Embeddings',
                               name='model-adapter',
-                              init_inputs={'model_entity': dl.Model,
-                                           'integration_name': "String"})
+                              init_inputs={'model_entity': dl.Model})
 class ModelAdapter(dl.BaseModelAdapter):
 
     def load(self, local_path, **kwargs):
@@ -19,15 +18,9 @@ class ModelAdapter(dl.BaseModelAdapter):
         if aws_credentials is None:
             raise ValueError("Cannot find integrations for AWS")
 
-        # decoded_bytes = base64.b64decode(aws_credentials)
-        # aws_credentials = decoded_bytes.decode("utf-8")
-        # aws_credentials = json.loads(aws_credentials)
-
-        # TODO: FOR LOCAL TESTING
-        with open(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd()))),
-                               'aws-credentials.json')) as f:
-            aws_credentials = json.load(f)
-
+        decoded_bytes = base64.b64decode(aws_credentials)
+        aws_credentials = decoded_bytes.decode("utf-8")
+        aws_credentials = json.loads(aws_credentials)
         logger.info("Loaded integrations")
 
         self.model_id = self.configuration.get("model_id", "cohere.embed-multilingual-v3")
