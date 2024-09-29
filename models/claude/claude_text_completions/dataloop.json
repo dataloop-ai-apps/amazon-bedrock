@@ -1,20 +1,28 @@
 {
-  "name": "amazon-bedrock-titan-text-g1-express",
-  "displayName": "Amazon Bedrock - Titan Text G1 Express",
-  "version": "0.0.7",
-  "scope": "project",
-  "description": "Amazon Bedrock - Titan Text G1 Express Application. This app provide accesses to AWS client and getting response from Titan Text G1 Express model using your keys",
+  "name": "bedrock-claude",
+  "displayName": "Amazon Bedrock - Claude",
+  "version": "0.0.1",
+  "scope": "public",
+  "description": "Amazon Bedrock - Titan Text G1 Models Application. This app provide accesses to AWS client and getting response from Titan Text G1 Express model using your keys",
   "attributes": {
     "Provider": "AWS",
+    "Deployed By": "AWS",
     "Category": "Model",
     "NLP": "Conversational",
     "Gen AI": "LLM",
-    "Media Type": "Text"
+    "Media Type": [
+      "Text"
+    ]
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
+    "gitTag": "0.0.1"
   },
   "components": {
     "computeConfigs": [
       {
-        "name": "amazon-titan-text-service",
+        "name": "bedrock-claude-service",
         "runtime": {
           "podType": "regular-s",
           "concurrency": 1,
@@ -29,19 +37,15 @@
     ],
     "modules": [
       {
-        "name": "amazon-titan-text-module",
-        "entryPoint": "models/titan/titan-adapter.py",
+        "name": "bedrock-claude-module",
+        "entryPoint": "models/claude/claude_text_completions/claude_text_completion.py",
         "className": "ModelAdapter",
-        "computeConfig": "amazon-titan-text-service",
+        "computeConfig": "bedrock-claude-service",
         "description": "Amazon Titan Text Module",
         "initInputs": [
           {
             "type": "Model",
             "name": "model_entity"
-          },
-          {
-            "type": "String",
-            "name": "integration_name"
           }
         ],
         "functions": [
@@ -78,7 +82,7 @@
             ],
             "displayName": "Evaluate a Model",
             "displayIcon": "",
-            "description": "Function to evaluate YoloX model performance"
+            "description": "Function to evaluate model performance"
           },
           {
             "name": "predict_items",
@@ -103,7 +107,7 @@
             ],
             "displayName": "Predict Items",
             "displayIcon": "",
-            "description": "Function to run YoloX inference on items"
+            "description": "Function to run inference on items"
           },
           {
             "name": "predict_dataset",
@@ -123,27 +127,59 @@
             ],
             "displayName": "Predict Dataset",
             "displayIcon": "",
-            "description": "Function to run YoloX inference on a dataset"
+            "description": "Function to run inference on a dataset"
           }
         ]
       }
     ],
     "models": [
       {
-        "name": "amazon-titan-text-express",
-        "moduleName": "amazon-titan-text-module",
+        "name": "anthropic-claude-v2",
+        "moduleName": "bedrock-claude-module",
         "scope": "project",
         "status": "pre-trained",
         "configuration": {
-          "model_id": "amazon.titan-text-express-v1"
+          "model_id": "anthropic.claude-v2",
+          "region": "",
+          "max_tokens": 200,
+          "top_p": 1.0,
+          "top_k": 250,
+          "temperature": 1.0,
+          "stop_sequences": []
         },
-        "supportedMethods": {
-          "load": true,
-          "predict": true,
-          "train": false,
-          "evaluate": true
+        "description": "Bedrock call for Anthropic Claude V2"
+      },
+      {
+        "name": "anthropic-claude-v2-1",
+        "moduleName": "bedrock-claude-module",
+        "scope": "project",
+        "status": "pre-trained",
+        "configuration": {
+          "model_id": "anthropic.claude-v2:1",
+          "region": "",
+          "max_tokens": 200,
+          "top_p": 1.0,
+          "top_k": 250,
+          "temperature": 1.0,
+          "stop_sequences": []
         },
-        "description": "Amazon Bedrock Titan Text is an advanced NLP service offered by AWS. It provides users with the capability to generate high-quality text using cutting-edge language models."
+        "description": "Bedrock call for Anthropic Claude V2:1."
+      },
+      {
+        "name": "anthropic-claude-instant-v1",
+        "moduleName": "bedrock-claude-module",
+        "scope": "project",
+        "status": "pre-trained",
+        "configuration": {
+          "model_id": "anthropic.claude-instant-v1",
+          "region": "",
+          "max_tokens": 200,
+          "top_p": 1.0,
+          "top_k": 250,
+          "temperature": 1.0,
+          "stop_sequences": []
+        },
+        "description": "Bedrock call for Anthropic Claude Instant V1."
       }
     ]
   }
