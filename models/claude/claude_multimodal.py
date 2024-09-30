@@ -19,17 +19,13 @@ class ModelAdapter(dl.BaseModelAdapter):
         if aws_credentials is None:
             raise ValueError("Cannot find integrations for AWS")
 
-        # decoded_bytes = base64.b64decode(aws_credentials)
-        # aws_credentials = decoded_bytes.decode("utf-8")
-        # aws_credentials = json.loads(aws_credentials)
-
-        # TODO: FOR LOCAL TESTING
-        with open(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), 'aws-credentials.json')) as f:
-            aws_credentials = json.load(f)
-
+        decoded_bytes = base64.b64decode(aws_credentials)
+        aws_credentials = decoded_bytes.decode("utf-8")
+        aws_credentials = json.loads(aws_credentials)
         logger.info("Loaded integrations")
-        self.model_id = self.configuration.get("model_id", "anthropic.claude-v2")  # TODO: REMOVE DEFAULT
-        region = self.configuration.get("region", "eu-central-1")  # TODO: REMOVE DEFAULT
+
+        self.model_id = self.configuration.get("model_id")
+        region = self.configuration.get("region")
         if region is "":
             raise ValueError("You must provide integrations on the model's configuration.")
 
@@ -39,36 +35,36 @@ class ModelAdapter(dl.BaseModelAdapter):
                                    aws_secret_access_key=aws_credentials['secret'])
 
     def stream_response(self, messages):
+        system_prompt = self.configuration.get('system_prompt', "")
         stream = self.configuration.get("stream", True)
         body = {
-            "prompt": messages,
-            "temperature": self.configuration.get("temperature", 1.0),
-            "top_p": self.configuration.get("top_p", 1.0),
-            "top_k": self.configuration.get("top_k", 250),
-            "max_tokens_to_sample": self.configuration.get("max_tokens", 200),
-            "stop_sequences": self.configuration.get("stop_sequences", []),
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": self.configuration.get("max_tokens", 200),
+            "system": system_prompt,
+            "messages": messages
 
         }
-        body_bytes = json.dumps(body).encode('utf-8')
+        body_bytes = json.dumps(body)
         if stream:
             streaming_response = self.client.invoke_model_with_response_stream(
                 modelId=self.model_id, body=body_bytes
             )
 
             # Extract and yield the response text in real-time.
-            for chunk in streaming_response["body"]:
-                completion = chunk.get('chunk').get('bytes').decode('utf-8')
-                completion = json.loads(completion)
-                yield completion.get('completion') or ""
+            for event in streaming_response.get("body"):
+                chunk = json.loads(event["chunk"]["bytes"])
+                if chunk['type'] == 'content_block_delta':
+                    if chunk['delta']['type'] == 'text_delta':
+                        yield chunk['delta']['text'] or ""
 
         else:
             response = self.client.invoke_model(body=body_bytes,
                                                 modelId=self.model_id,
                                                 contentType='application/json')
 
-            result = response.get('body').read().decode('utf-8')
+            result = response.get("body").read().decode('utf-8')
             result = json.loads(result)
-            output_text = result.get("completion")
+            output_text = result.get("content")[0].get("text")
             yield output_text or ""
 
     def predict(self, batch, **kwargs):
@@ -112,29 +108,33 @@ class ModelAdapter(dl.BaseModelAdapter):
         :param messages: A list of messages in the OpenAI format (default by SDK).
         :return: inputText for the request.
         """
-        conversation_history = ""
 
         # Iterate through the messages and format the conversation history
         for message in messages:
-            role = message['role']
-            if role == 'user':
-                role = 'Human'
-            else:
-                role = role.capitalize()
+            for m in message["content"]:
+                if "image" in m.get("type"):
+                    m["type"] = "image"
+                    m["image_url"] = {"type": "base64",
+                                      "media_type": ModelAdapter.extract_image_mime_type(m["image_url"].get("url")),
+                                      "data": m["image_url"].get("url").split(',')[1]}
+                    m["source"] = m.pop("image_url")
 
-            for content in message['content']:
-                if content['type'] == 'text':
-                    conversation_history += f"{role}: {content['text']}\n"
+        return messages
 
-        # Build the final inputText
-        input_text = f"\n\n{conversation_history}\n\nAssistant:"
-
-        return input_text
+    @staticmethod
+    def extract_image_mime_type(base64_string):
+        parts = base64_string.split(',')
+        if len(parts) > 1:
+            type_info = parts[0]
+            # Extract the MIME type, which is in the format "data:image/jpeg;base64"
+            mime_type = type_info.split(';')[0].replace('data:', '')
+            return mime_type
+        return None
 
 
 if __name__ == '__main__':
     dl.setenv("rc")
-    item = dl.items.get(item_id="66f00d597368dff901344499")
+    item = dl.items.get(item_id="66fa7689fd4c744f0f0c60f1")
     model = dl.models.get(model_id="66f2c541f70f5e358a65f2a6")
 
     adapter = ModelAdapter(model)

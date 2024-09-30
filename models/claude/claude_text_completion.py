@@ -122,6 +122,6 @@ class ModelAdapter(dl.BaseModelAdapter):
                     conversation_history += f"{role}: {content['text']}\n"
 
         # Build the final inputText
-        input_text = f"\n\n{conversation_history}\n\nAssistant:"
+        input_text = f"{system_prompt}\n\n{conversation_history}\n\nAssistant:"
 
         return input_text
