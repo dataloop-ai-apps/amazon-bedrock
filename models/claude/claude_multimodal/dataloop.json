@@ -144,7 +144,9 @@
           "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
           "model_id": "anthropic.claude-3-sonnet-20240229-v1:0",
           "region": "",
-          "max_tokens": 200
+          "max_tokens": 200,
+          "stream": true,
+          "anthropic_version": "bedrock-2023-05-31"
         },
         "description": "Bedrock call for Claude 3 Sonnet."
       },
@@ -157,12 +159,14 @@
           "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
           "model_id": "anthropic.claude-3-5-sonnet-20240620-v1:0",
           "region": "",
-          "max_tokens": 200
+          "max_tokens": 200,
+          "stream": true,
+          "anthropic_version": "bedrock-2023-05-31"
         },
         "description": "Bedrock call for Claude 3.5 Sonnet."
       },
       {
-        "name": "anthropic-claude-instant-v1",
+        "name": "anthropic.claude-3-haiku-20240307-v1:0",
         "moduleName": "claude-multimodal-module",
         "scope": "project",
         "status": "pre-trained",
@@ -170,7 +174,9 @@
           "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
           "model_id": "anthropic.claude-3-haiku-20240307-v1:0",
           "region": "",
-          "max_tokens": 200
+          "max_tokens": 200,
+          "stream": true,
+          "anthropic_version": "bedrock-2023-05-31"
         },
         "description": "Bedrock call for Claude 3 Haiku."
       }

@@ -155,13 +155,15 @@
         "scope": "project",
         "status": "pre-trained",
         "configuration": {
+          "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
           "model_id": "anthropic.claude-v2:1",
           "region": "",
           "max_tokens": 200,
           "top_p": 1.0,
           "top_k": 250,
           "temperature": 1.0,
-          "stop_sequences": []
+          "stop_sequences": [],
+          "stream": true
         },
         "description": "Bedrock call for Anthropic Claude V2:1."
       },
@@ -171,13 +173,15 @@
         "scope": "project",
         "status": "pre-trained",
         "configuration": {
+          "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
           "model_id": "anthropic.claude-instant-v1",
           "region": "",
           "max_tokens": 200,
           "top_p": 1.0,
           "top_k": 250,
           "temperature": 1.0,
-          "stop_sequences": []
+          "stop_sequences": [],
+          "stream": true
         },
         "description": "Bedrock call for Anthropic Claude Instant V1."
       }
