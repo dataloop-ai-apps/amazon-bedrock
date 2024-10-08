@@ -37,7 +37,7 @@
     "modules": [
       {
         "name": "cohere-embed-text-module",
-        "entryPoint": "models/cohere/cohere_embeddings_adapter.py",
+        "entryPoint": "models/cohere/embedding_models/cohere_embeddings_adapter.py",
         "className": "ModelAdapter",
         "computeConfig": "cohere-embed-text-deploy",
         "description": "Titan Embeddings Text Module",

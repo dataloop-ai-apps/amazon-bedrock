@@ -40,7 +40,7 @@
     "modules": [
       {
         "name": "claude-multimodal-module",
-        "entryPoint": "models/claude/claude_multimodal.py",
+        "entryPoint": "models/claude/claude_multimodal/claude_multimodal.py",
         "className": "ModelAdapter",
         "computeConfig": "claude-multimodal-service",
         "description": "Claude MultiModal Module",

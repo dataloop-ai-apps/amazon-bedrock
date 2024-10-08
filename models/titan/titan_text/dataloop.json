@@ -38,7 +38,7 @@
     "modules": [
       {
         "name": "amazon-titan-text-module",
-        "entryPoint": "models/text_models/titan_text_adapter.py",
+        "entryPoint": "models/titan/titan_text/titan_text_adapter.py",
         "className": "ModelAdapter",
         "computeConfig": "amazon-titan-text-service",
         "description": "Amazon Titan Text Module",

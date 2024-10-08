@@ -37,7 +37,7 @@
     "modules": [
       {
         "name": "titan-embed-text-module",
-        "entryPoint": "models/titan_text_models/titan_embeddings_adapter.py",
+        "entryPoint": "models/titan/titan_embeddings_text/titan_embeddings_adapter.py",
         "className": "ModelAdapter",
         "computeConfig": "titan-embed-text-deploy",
         "description": "Titan Embeddings Text Module",
