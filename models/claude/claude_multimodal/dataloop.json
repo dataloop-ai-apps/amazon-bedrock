@@ -28,6 +28,7 @@
         "runtime": {
           "podType": "regular-s",
           "concurrency": 1,
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/amazon-bedrock:0.0.1",
           "autoscaler": {
             "type": "rabbitmq",
             "minReplicas": 0,
