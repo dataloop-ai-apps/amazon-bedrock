@@ -6,7 +6,7 @@ USER 1000
 WORKDIR /tmp
 ENV HOME=/tmp
 RUN pip install \
-    boto3
+    boto3 \
     botocore
 
 
