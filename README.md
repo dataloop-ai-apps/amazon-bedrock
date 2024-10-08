@@ -68,6 +68,11 @@ Available models:
 
 Install the models from MarketPlace:
 
+### Editing the configuration
+
+All models are created with basic configurations. To edit configurations via the platform, go to the model page in the Model Management and edit the config.
+Click [here](https://developers.dataloop.ai/tutorials/model_management/ai_library/chapter/#model-configuration) for more information. Check the configuration variables on each of the models to use them correctly.
+
 ### Amazon bedrock
 
 create access

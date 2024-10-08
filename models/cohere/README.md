@@ -1,4 +1,4 @@
-# Cohere Embeddings Models served by Amazon Bedrock
+# Cohere Embeddings Models served by Amazon Bedrock in Dataloop Platform
 
 ## Overview
 
@@ -32,17 +32,12 @@ high-quality embeddings. These embeddings are essential for numerous natural lan
 3. **Recommendation Systems**: Implement personalized recommendations by embedding user data and content for more
    accurate suggestions.
 
-## How to Get Started
+### The basic configurations
 
-1. **Integrate via Amazon Bedrock**: Use Amazon Bedrock to deploy and manage Cohere Embeddings Models, taking advantage
-   of AWS's robust infrastructure for scalable and secure deployment.
+* ```model_id```: Model id. The model ids are from [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
+* ```region```: The region were the models deployed in your AWS account. make sure to edit this field (default: ```["float"]```).
 
-2. **API Access**: Leverage Bedrock's API to call the Cohere Embeddings Models for various NLP tasks. You can feed raw
-   text into the API, and it returns embeddings that can be utilized in your application.
-
-3. **Applications**: These models are well-suited for applications like:
-    - Information retrieval
-    - Multilingual content analysis
-    - Customer support automation
-    - Content recommendation
-
+Look [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-embed.html) for explanations on this variables: 
+* ```input_type```: Default: ```search_query```.
+* ```truncate```: Default ```END```.
+* ```embedding_types```: Default ```["float"]```.

@@ -1,10 +1,12 @@
-# Claude Models served by Amazon Bedrock
+# Claude Models served by Amazon Bedrock in Dataloop Platform
 
 ## Overview
 
-Claude models are cutting-edge AI models optimized for text completions and multimodal tasks. Served by Amazon Bedrock,
+Claude's models are cutting-edge AI models optimized for text completions and multimodal tasks. Served by Amazon
+Bedrock,
 Claude models are designed for advanced natural language understanding, providing robust solutions for a wide range of
 text-based and multimodal applications.
+
 
 ### 1. Claude Text Completions
 
@@ -22,6 +24,16 @@ excels in understanding context, generating coherent, and contextually accurate 
 - Conversational AI
 - Text summarization
 - Automated content generation
+
+### The basic configurations
+
+* ```system_prompt```: Model's system prompt (default: ```You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer```)
+* ```model_id```: Model id. The model ids are from [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
+* ```region```: The region were the models deployed in your AWS account. make sure to edit this field (default: ```""```).
+* ```max_tokens```: The maximum number of tokens that the model can generate in a response (default: ```200```).
+* ```stream```: Whether to stream the response (default ```true```).
+* ```anthropic_version```: Anthropic version (default ```bedrock-2023-05-31```).
+
 
 ### 2. Claude MultiModel Models
 
@@ -42,12 +54,14 @@ multimodal inputs.
 - Multimodal content analysis
 - Enhanced AI assistants capable of understanding both text and images
 
-## Getting Started with Claude Models
+### The basic configurations
 
-1. **Integration via Amazon Bedrock**: Use Amazon Bedrock for deploying Claude models, ensuring scalable, secure, and
-   easy-to-manage workflows.
-2. **API Access**: Bedrock APIs allow you to integrate Claude models into your applications with ease, whether for
-   completions or multimodal processing.
-3. **Applications**: Claude models are suitable for applications like customer support, automated content generation,
-   conversational AI, and image-text analysis.
-
+* ```system_prompt```: Model's system prompt (default: ```You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer```)
+* ```model_id```: Model id. The model ids are from [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
+* ```region```: The region were the models deployed in your AWS account. make sure to edit this field (default: ```""```).
+* ```max_tokens```: The maximum number of tokens that the model can generate in a response (default: ```200```).
+* ```stream```: Whether to stream the response (default ```true```).
+* ```top_p```: Controls the cumulative probability threshold for token selection, similar to nucleus sampling. Default is```1.0```.
+* ```top_k```: Limits the number of highest-probability tokens considered during generation. Default is ```250```.
+* ```temperature```: Adjusts the randomness of the model's output; higher values produce more varied results. Default is ```1.0```.
+* ```stop_sequences```: Specifies sequences at which the model will stop generating further tokens. Default is ```[]```.

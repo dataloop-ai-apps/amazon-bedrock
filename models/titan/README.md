@@ -1,4 +1,4 @@
-# Amazon Titan Models
+# Amazon Titan Models served by Amazon Bedrock in Dataloop Platform
 
 ## Overview
 
@@ -24,6 +24,17 @@ Titan models excel at capturing and understanding detailed inputs.
 - Content generation
 - Conversational agents
 
+### The basic configurations
+
+* ```system_prompt```: Model's system prompt (default: ```You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer```)
+* ```model_id```: Model id. The model ids are from [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
+* ```region```: The region were the models deployed in your AWS account. make sure to edit this field (default: ```""```).
+* ```max_tokens```: The maximum number of tokens that the model can generate in a response (default: ```512```).
+* ```stream```: Whether to stream the response (default ```true```).
+* ```top_p```: Controls the cumulative probability threshold for token selection, similar to nucleus sampling. Default is```0.9```.
+* ```temperature```: Adjusts the randomness of the model's output; higher values produce more varied results. Default is ```0.7```.
+* ```stop_sequences```: Specifies sequences at which the model will stop generating further tokens. Default is ```[]```.
+* 
 ### 2. Titan Embeddings Models
 
 Titan Embeddings Models are designed to convert text into high-quality embeddings for tasks such as search, clustering,
@@ -42,27 +53,12 @@ and recommendation. These models support multilingual embeddings, enabling globa
 - Clustering and classification
 - Recommendation engines
 
-### 3. Titan Text Lite
+### The basic configurations
 
-Titan Text Lite models provide a lighter, faster alternative to Titan Text Models, optimized for less resource-intensive
-tasks while maintaining high performance.
+* ```model_id```: Model id. The model ids are from [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-titan-embed-text.html).
+* ```region```: The region were the models deployed in your AWS account. make sure to edit this field (default: ```["float"]```).
 
-#### Key Features:
-
-- **Faster Inference**: Optimized for quick responses, making it ideal for real-time applications.
-- **Reduced Resource Usage**: Requires fewer computational resources while maintaining high-quality outputs.
-- **Flexible Deployment**: Seamlessly integrates into Amazon Bedrock, offering scalable deployment.
-
-#### Use Cases:
-
-- Real-time chatbot interactions
-- Dynamic content generation
-- Lightweight NLP applications
-
-## Getting Started with Titan Models
-
-1. **Integration via Amazon Bedrock**: Leverage Amazon Bedrock’s infrastructure to deploy Titan models for various NLP
-   tasks with minimal setup.
-2. **API Access**: Access Titan models through Bedrock’s API to easily integrate them into your existing applications.
-3. **Applications**: Titan models are suitable for text generation, search, clustering, recommendation systems, and
-   more.
+Look [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-embed.html) for explanations on these variables: 
+* ```dimensions```: Default: ```1024```.
+* ```normalize```: Default ```true```.
+* ```embeddingTypes```: Default ```["float"]```.

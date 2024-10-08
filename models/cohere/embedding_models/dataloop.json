@@ -106,7 +106,8 @@
         "status": "pre-trained",
         "inputType": "text",
         "configuration": {
-          "model_id": "cohere.embed-english-v3"
+          "model_id": "cohere.embed-english-v3",
+          "region": ""
         },
         "description": "Bedrock call for Cohere Embed English."
       },
@@ -118,6 +119,7 @@
         "inputType": "text",
         "configuration": {
           "model_id": "cohere.embed-multilingual-v3",
+          "region": "",
           "embedding_types": [
             "float"
           ],
