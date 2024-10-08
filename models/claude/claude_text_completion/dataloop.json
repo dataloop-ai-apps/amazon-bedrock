@@ -42,6 +42,9 @@
         "className": "ModelAdapter",
         "computeConfig": "bedrock-claude-service",
         "description": "Amazon Titan Text Module",
+        "integrations": [
+          "dl-aws-integration"
+        ],
         "initInputs": [
           {
             "type": "Model",

@@ -42,7 +42,7 @@
         "computeConfig": "titan-embed-text-deploy",
         "description": "Titan Embeddings Text Module",
         "integrations": [
-          "dl-openai-api-key"
+          "dl-aws-integration"
         ],
         "initInputs": [
           {

@@ -44,6 +44,9 @@
         "className": "ModelAdapter",
         "computeConfig": "claude-multimodal-service",
         "description": "Claude MultiModal Module",
+        "integrations": [
+          "dl-aws-integration"
+        ],
         "initInputs": [
           {
             "type": "Model",
