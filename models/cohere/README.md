@@ -37,7 +37,7 @@ high-quality embeddings. These embeddings are essential for numerous natural lan
 * ```model_id```: Model id. The model ids are from [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html).
 * ```region```: The region were the models deployed in your AWS account. make sure to edit this field (default: ```["float"]```).
 
-Look [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-embed.html) for explanations on this variables: 
+Look [here](https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-embed.html) for explanations on these variables: 
 * ```input_type```: Default: ```search_query```.
 * ```truncate```: Default ```END```.
 * ```embedding_types```: Default ```["float"]```.

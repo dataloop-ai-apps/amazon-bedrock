@@ -1,6 +1,6 @@
 {
-  "name": "bedrock-cohere-embeddings",
-  "displayName": "Cohere Embed models",
+  "name": "bedrock-cohere-english-embeddings",
+  "displayName": "Cohere Embed English Model",
   "version": "0.0.1",
   "description": "Cohere Embed models Application",
   "scope": "public",
@@ -21,7 +21,7 @@
   "components": {
     "computeConfigs": [
       {
-        "name": "cohere-embeddings-deploy",
+        "name": "cohere-embeddings-english-deploy",
         "runtime": {
           "podType": "regular-xs",
           "concurrency": 1,
@@ -36,11 +36,11 @@
     ],
     "modules": [
       {
-        "name": "cohere-embed-text-module",
+        "name": "cohere-embed-english-module",
         "entryPoint": "models/cohere/embedding_models/cohere_embeddings_adapter.py",
         "className": "ModelAdapter",
-        "computeConfig": "cohere-embed-text-deploy",
-        "description": "Titan Embeddings Text Module",
+        "computeConfig": "cohere-embeddings-english-deploy",
+        "description": "Cohere Embed English Module",
         "integrations": [
           "dl-aws-integration"
         ],
@@ -101,7 +101,7 @@
     "models": [
       {
         "name": "cohere-embed-english-v3",
-        "moduleName": "cohere-embed-text-module",
+        "moduleName": "cohere-embed-english-module",
         "scope": "project",
         "status": "pre-trained",
         "inputType": "text",
@@ -110,23 +110,6 @@
           "region": ""
         },
         "description": "Bedrock call for Cohere Embed English."
-      },
-      {
-        "name": "cohere-embed-multilingual-v3",
-        "moduleName": "cohere-embed-text-module",
-        "scope": "project",
-        "status": "pre-trained",
-        "inputType": "text",
-        "configuration": {
-          "model_id": "cohere.embed-multilingual-v3",
-          "region": "",
-          "embedding_types": [
-            "float"
-          ],
-          "input_type": "search_query",
-          "truncate": "END"
-        },
-        "description": "Bedrock call for Cohere Embed Multilingual."
       }
     ]
   }
