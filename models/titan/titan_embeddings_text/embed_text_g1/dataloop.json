@@ -1,11 +1,11 @@
 {
-  "name": "bedrock-cohere-embeddings-multilingual",
-  "displayName": "Embed Multilingual",
+  "name": "bedrock-titan-embeddings-g1",
+  "displayName": "Titan Embed Text G1",
   "version": "0.0.1",
-  "description": "Cohere Embed Multilingual Model Application",
+  "description": "Titan Embeddings Text G1 Models Application",
   "scope": "public",
   "attributes": {
-    "Provider": "Cohere",
+    "Provider": "AWS",
     "Deployed By": "AWS",
     "Category": "Model",
     "NLP": "Embeddings",
@@ -16,7 +16,7 @@
   "components": {
     "computeConfigs": [
       {
-        "name": "cohere-embeddings-multilingual-deploy",
+        "name": "text-embeddings-g1-deploy",
         "runtime": {
           "podType": "regular-xs",
           "concurrency": 1,
@@ -31,11 +31,11 @@
     ],
     "modules": [
       {
-        "name": "cohere-embed-multilingual-module",
-        "entryPoint": "models/cohere/embedding_models/cohere_embeddings_adapter.py",
+        "name": "titan-embed-text-g1-module",
+        "entryPoint": "models/titan/titan_embeddings_text/titan_embeddings_adapter.py",
         "className": "ModelAdapter",
-        "computeConfig": "cohere-embeddings-multilingual-deploy",
-        "description": "Cohere Embeddings Multilingual Module",
+        "computeConfig": "text-embeddings-g1-deploy",
+        "description": "Titan Embeddings Text G1 Module",
         "integrations": [
           "dl-aws-integration"
         ],
@@ -95,21 +95,21 @@
     ],
     "models": [
       {
-        "name": "cohere-embed-multilingual-v3",
-        "moduleName": "cohere-embed-multilingual-module",
+        "name": "titan-embed-text-g1",
+        "moduleName": "titan-embed-text-module",
         "scope": "project",
         "status": "pre-trained",
         "inputType": "text",
         "configuration": {
-          "model_id": "cohere.embed-multilingual-v3",
+          "model_id": "amazon.titan-embed-text-v1",
           "region": "",
           "embedding_types": [
             "float"
           ],
-          "input_type": "search_query",
-          "truncate": "END"
+          "normalize": true,
+          "dimensions": 1024
         },
-        "description": "Bedrock call for Cohere Embed Multilingual."
+        "description": "Bedrock call for Amazon Titan Embeddings G1."
       }
     ]
   }

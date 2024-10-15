@@ -1,11 +1,11 @@
 {
-  "name": "bedrock-claude-v2",
-  "displayName": "Claude V2",
+  "name": "bedrock-titan-text-lite",
+  "displayName": "Titan Text Lite",
   "version": "0.0.1",
   "scope": "public",
-  "description": "Amazon Bedrock - Claude V2 Models Application. This app enables AWS clients to access and interact with the Claude V2 model using their API keys, providing fast and efficient AI-generated text responses.",
+  "description": "Amazon Bedrock - Titan Text Lite Model Application. This app provide accesses to AWS client and getting response from Titan Text models using your keys",
   "attributes": {
-    "Provider": "",
+    "Provider": "AWS",
     "Deployed By": "AWS",
     "Category": "Model",
     "NLP": "Conversational",
@@ -17,7 +17,7 @@
   "components": {
     "computeConfigs": [
       {
-        "name": "bedrock-claude-v2-service",
+        "name": "amazon-titan-text-lite-service",
         "runtime": {
           "podType": "regular-s",
           "concurrency": 1,
@@ -33,11 +33,11 @@
     ],
     "modules": [
       {
-        "name": "bedrock-claude-module",
-        "entryPoint": "models/claude/claude_text_completion/claude_text_completion.py",
+        "name": "amazon-titan-text-lite-module",
+        "entryPoint": "models/titan/titan_text/titan_text_adapter.py",
         "className": "ModelAdapter",
-        "computeConfig": "bedrock-claude-v2-service",
-        "description": "Amazon Titan Text Module",
+        "computeConfig": "amazon-titan-text-lite-service",
+        "description": "Amazon Titan Text Lite Module",
         "integrations": [
           "dl-aws-integration"
         ],
@@ -81,7 +81,7 @@
             ],
             "displayName": "Evaluate a Model",
             "displayIcon": "",
-            "description": "Function to evaluate model performance"
+            "description": "Function to evaluate YoloX model performance"
           },
           {
             "name": "predict_items",
@@ -106,7 +106,7 @@
             ],
             "displayName": "Predict Items",
             "displayIcon": "",
-            "description": "Function to run inference on items"
+            "description": "Function to run YoloX inference on items"
           },
           {
             "name": "predict_dataset",
@@ -126,45 +126,28 @@
             ],
             "displayName": "Predict Dataset",
             "displayIcon": "",
-            "description": "Function to run inference on a dataset"
+            "description": "Function to run YoloX inference on a dataset"
           }
         ]
       }
     ],
     "models": [
       {
-        "name": "anthropic-claude-v2",
-        "moduleName": "bedrock-claude-v2-module",
-        "scope": "project",
-        "status": "pre-trained",
-        "configuration": {
-          "model_id": "anthropic.claude-v2",
-          "region": "",
-          "max_tokens": 200,
-          "top_p": 1.0,
-          "top_k": 250,
-          "temperature": 1.0,
-          "stop_sequences": []
-        },
-        "description": "Bedrock call for Anthropic Claude V2"
-      },
-      {
-        "name": "anthropic-claude-v2-1",
-        "moduleName": "bedrock-claude-v2-module",
+        "name": "amazon-titan-text-lite",
+        "moduleName": "amazon-titan-text-lite-module",
         "scope": "project",
         "status": "pre-trained",
         "configuration": {
           "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
-          "model_id": "anthropic.claude-v2:1",
+          "model_id": "amazon.titan-text-lite-v1",
           "region": "",
-          "max_tokens": 200,
-          "top_p": 1.0,
-          "top_k": 250,
-          "temperature": 1.0,
+          "max_tokens": 512,
+          "top_p": 0.9,
+          "temperature": 0.7,
           "stop_sequences": [],
           "stream": true
         },
-        "description": "Bedrock call for Anthropic Claude V2:1."
+        "description": "Bedrock call for Amazon Titan Text Lite."
       }
     ]
   }

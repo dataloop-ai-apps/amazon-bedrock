@@ -1,6 +1,6 @@
 {
   "name": "bedrock-claude-instant",
-  "displayName": "Amazon Bedrock - Claude Instant",
+  "displayName": "Claude Instant",
   "version": "0.0.1",
   "scope": "public",
   "description": "Amazon Bedrock - Claude Instant Model Application. This app enables AWS clients to access and interact with the Claude Instant model using their API keys, providing fast and efficient AI-generated text responses.",
@@ -13,11 +13,6 @@
     "Media Type": [
       "Text"
     ]
-  },
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.1"
   },
   "components": {
     "computeConfigs": [

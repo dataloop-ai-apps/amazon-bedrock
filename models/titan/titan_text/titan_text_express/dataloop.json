@@ -1,9 +1,9 @@
 {
-  "name": "bedrock-titan-text",
-  "displayName": "Amazon Bedrock - Titan Text Models",
+  "name": "bedrock-titan-text-express",
+  "displayName": "Titan Text Express",
   "version": "0.0.1",
   "scope": "public",
-  "description": "Amazon Bedrock - Titan Text Models Application. This app provide accesses to AWS client and getting response from Titan Text models using your keys",
+  "description": "Amazon Bedrock - Titan Text Express Model Application. This app provide accesses to AWS client and getting response from Titan Text models using your keys",
   "attributes": {
     "Provider": "AWS",
     "Deployed By": "AWS",
@@ -14,15 +14,10 @@
       "Text"
     ]
   },
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.1"
-  },
   "components": {
     "computeConfigs": [
       {
-        "name": "amazon-titan-text-service",
+        "name": "amazon-titan-text-express-service",
         "runtime": {
           "podType": "regular-s",
           "concurrency": 1,
@@ -38,11 +33,11 @@
     ],
     "modules": [
       {
-        "name": "amazon-titan-text-module",
+        "name": "amazon-titan-text-express-module",
         "entryPoint": "models/titan/titan_text/titan_text_adapter.py",
         "className": "ModelAdapter",
-        "computeConfig": "amazon-titan-text-service",
-        "description": "Amazon Titan Text Module",
+        "computeConfig": "amazon-titan-text-express-service",
+        "description": "Amazon Titan Text Express Module",
         "integrations": [
           "dl-aws-integration"
         ],
@@ -139,7 +134,7 @@
     "models": [
       {
         "name": "amazon-titan-text-express",
-        "moduleName": "amazon-titan-text-module",
+        "moduleName": "amazon-titan-text-express-module",
         "scope": "project",
         "status": "pre-trained",
         "configuration": {
@@ -153,23 +148,6 @@
           "stream": true
         },
         "description": "Bedrock call for Amazon Titan Text Express."
-      },
-      {
-        "name": "amazon-titan-text-lite",
-        "moduleName": "amazon-titan-text-module",
-        "scope": "project",
-        "status": "pre-trained",
-        "configuration": {
-          "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
-          "model_id": "amazon.titan-text-lite-v1",
-          "region": "",
-          "max_tokens": 512,
-          "top_p": 0.9,
-          "temperature": 0.7,
-          "stop_sequences": [],
-          "stream": true
-        },
-        "description": "Bedrock call for Amazon Titan Text Lite."
       }
     ]
   }

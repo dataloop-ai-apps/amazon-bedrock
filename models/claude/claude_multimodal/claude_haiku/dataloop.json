@@ -1,6 +1,6 @@
 {
   "name": "bedrock-claude-haiku",
-  "displayName": "Amazon Bedrock - Claude Haiku",
+  "displayName": "Claude Haiku",
   "version": "0.0.1",
   "scope": "public",
   "description": "Amazon Bedrock - Claude Haiku Models Application. This application is designed for AWS clients to access and interact exclusively with Claude Haiku models.",
@@ -15,11 +15,6 @@
       "Image",
       "Multi Modal"
     ]
-  },
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.1"
   },
   "components": {
     "computeConfigs": [

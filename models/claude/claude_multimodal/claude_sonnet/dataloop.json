@@ -1,6 +1,6 @@
 {
   "name": "bedrock-claude-sonnet",
-  "displayName": "Amazon Bedrock - Claude Sonnet",
+  "displayName": "Claude Sonnet",
   "version": "0.0.1",
   "scope": "public",
   "description": "Amazon Bedrock - Claude Sonnet Models Application. This application provides access to Claude Sonnet models for AWS clients, allowing seamless interaction with advanced AI capabilities focused on text analysis and generation. Use your API keys to retrieve high-quality, context-aware responses from the Claude Sonnet models.",
@@ -15,11 +15,6 @@
       "Image",
       "Multi Modal"
     ]
-  },
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.1"
   },
   "components": {
     "computeConfigs": [

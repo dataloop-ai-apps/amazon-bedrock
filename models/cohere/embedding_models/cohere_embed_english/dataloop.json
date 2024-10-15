@@ -1,6 +1,6 @@
 {
   "name": "bedrock-cohere-english-embeddings",
-  "displayName": "Cohere Embed English Model",
+  "displayName": "Embed English",
   "version": "0.0.1",
   "description": "Cohere Embed models Application",
   "scope": "public",
@@ -12,11 +12,6 @@
     "Media Type": [
       "Text"
     ]
-  },
-  "codebase": {
-    "type": "git",
-    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.1"
   },
   "components": {
     "computeConfigs": [
