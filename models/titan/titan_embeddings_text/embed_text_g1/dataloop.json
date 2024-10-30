@@ -96,16 +96,14 @@
     "models": [
       {
         "name": "titan-embed-text-g1",
-        "moduleName": "titan-embed-text-module",
+        "moduleName": "titan-embed-text-g1-module",
         "scope": "project",
         "status": "pre-trained",
         "inputType": "text",
         "configuration": {
           "model_id": "amazon.titan-embed-text-v1",
           "region": "",
-          "embedding_types": [
-            "float"
-          ],
+          "embedding_types": "float",
           "normalize": true,
           "dimensions": 1024
         },

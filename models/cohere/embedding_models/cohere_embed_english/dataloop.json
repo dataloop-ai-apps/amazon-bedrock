@@ -102,7 +102,10 @@
         "inputType": "text",
         "configuration": {
           "model_id": "cohere.embed-english-v3",
-          "region": ""
+          "region": "",
+          "embedding_types": "float",
+          "input_type": "search_query",
+          "truncate": "END"
         },
         "description": "Bedrock call for Cohere Embed English."
       }

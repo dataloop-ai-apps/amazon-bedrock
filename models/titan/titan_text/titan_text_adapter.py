@@ -9,16 +9,22 @@ class ModelAdapter(BaseBedrockCompletionAdapter):
 
     def stream_response(self, messages):
         stream = self.configuration.get("stream", True)
+        temperature = self.configuration.get("temperature", 0.7)
+        top_p = self.configuration.get("top_p", 1.0)
+        max_token_count = self.configuration.get("max_tokens", 4096)
+        stop_sequences = self.configuration.get("stop_sequences", [])
+
         body = {
             "inputText": messages,
             "textGenerationConfig": {
-                "temperature": self.configuration.get("temperature", 0.7),
-                "topP": self.configuration.get("top_p", 1.0),
-                "maxTokenCount": self.configuration.get("max_tokens", 4096),
-                "stopSequences": self.configuration.get("stop_sequences", []),
+                "temperature": temperature,
+                "topP": top_p,
+                "maxTokenCount": max_token_count,
+                "stopSequences": stop_sequences,
             }
         }
         body_bytes = json.dumps(body).encode('utf-8')
+
         if stream:
             streaming_response = self.client.invoke_model_with_response_stream(
                 modelId=self.model_id, body=body_bytes

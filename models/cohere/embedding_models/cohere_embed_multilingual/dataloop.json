@@ -103,9 +103,7 @@
         "configuration": {
           "model_id": "cohere.embed-multilingual-v3",
           "region": "",
-          "embedding_types": [
-            "float"
-          ],
+          "embedding_types": "float",
           "input_type": "search_query",
           "truncate": "END"
         },

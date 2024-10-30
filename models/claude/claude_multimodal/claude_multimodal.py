@@ -10,14 +10,17 @@ class ModelAdapter(BaseBedrockCompletionAdapter):
     def stream_response(self, messages):
         system_prompt = self.configuration.get('system_prompt', "")
         stream = self.configuration.get("stream", True)
-        body = {
-            "anthropic_version": self.configuration.get("anthropic_version", "bedrock-2023-05-31"),
-            "max_tokens": self.configuration.get("max_tokens", 200),
-            "system": system_prompt,
-            "messages": messages
+        anthropic_version = self.configuration.get("anthropic_version", "bedrock-2023-05-31")
+        max_tokens = self.configuration.get("max_tokens", 200)
 
+        body = {
+            "anthropic_version": anthropic_version,
+            "max_tokens": max_tokens,
+            "system": system_prompt,
+            "messages": messages,
         }
         body_bytes = json.dumps(body)
+
         if stream:
             streaming_response = self.client.invoke_model_with_response_stream(
                 modelId=self.model_id, body=body_bytes
@@ -55,18 +58,18 @@ class ModelAdapter(BaseBedrockCompletionAdapter):
                 if "image" in m.get("type"):
                     m["type"] = "image"
                     m["image_url"] = {"type": "base64",
-                                      "media_type": ModelAdapter.extract_image_mime_type(m["image_url"].get("url")),
+                                      "media_type": ModelAdapter.extract_image_mimetype(m["image_url"].get("url")),
                                       "data": m["image_url"].get("url").split(',')[1]}
                     m["source"] = m.pop("image_url")
 
         return messages
 
     @staticmethod
-    def extract_image_mime_type(base64_string):
+    def extract_image_mimetype(base64_string):
         parts = base64_string.split(',')
         if len(parts) > 1:
             type_info = parts[0]
             # Extract the MIME type, which is in the format "data:image/jpeg;base64"
-            mime_type = type_info.split(';')[0].replace('data:', '')
-            return mime_type
+            mimetype = type_info.split(';')[0].replace('data:', '')
+            return mimetype
         return None

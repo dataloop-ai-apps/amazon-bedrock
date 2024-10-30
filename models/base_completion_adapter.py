@@ -8,9 +8,6 @@ import os
 logger = logging.getLogger('ModelAdapter')
 
 
-@dl.Package.decorators.module(description='Model Adapter for Amazon Bedrock Completions Models',
-                              name='model-adapter',
-                              init_inputs={'model_entity': dl.Model})
 class BaseBedrockCompletionAdapter(dl.BaseModelAdapter):
 
     def load(self, local_path, **kwargs):
@@ -25,28 +22,30 @@ class BaseBedrockCompletionAdapter(dl.BaseModelAdapter):
 
         self.model_id = self.configuration.get("model_id")
         region = self.configuration.get("region")
-        if region is "":
-            raise ValueError("You must provide region on the model's configuration.")
+        if region == "":
+            raise ValueError("You must provide the region on the model's configuration.")
 
         self.client = boto3.client(service_name="bedrock-runtime",
                                    region_name=region,
                                    aws_access_key_id=aws_credentials['key'],
                                    aws_secret_access_key=aws_credentials['secret'])
 
+        self.adapter_defaults.upload_annotations = False
+
     def predict(self, batch, **kwargs):
         system_prompt = self.configuration.get('system_prompt', "")
         for prompt_item in batch:
             # Get all messages including model annotations
-            _messages = prompt_item.to_messages(model_name=self.model_entity.name)
+            messages = prompt_item.to_messages(model_name=self.model_entity.name)
 
             nearest_items = prompt_item.prompts[-1].metadata.get('nearestItems', [])
             if len(nearest_items) > 0:
                 context = prompt_item.build_context(nearest_items=nearest_items,
                                                     add_metadata=self.configuration.get("add_metadata"))
                 logger.info(f"Nearest items Context: {context}")
-                _messages.append({"role": "assistant", "content": context})
+                messages.append({"role": "assistant", "content": context})
 
-            messages = self.reformat_messages(messages=_messages, system_prompt=system_prompt)
+            messages = self.reformat_messages(messages=messages, system_prompt=system_prompt)
             streamed_response = self.stream_response(messages=messages)
             response = ""
             for chunk in streamed_response:

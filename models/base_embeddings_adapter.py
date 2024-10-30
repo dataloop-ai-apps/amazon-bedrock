@@ -8,9 +8,6 @@ import os
 logger = logging.getLogger('ModelAdapter')
 
 
-@dl.Package.decorators.module(description='Model Adapter for Amazon Bedrock Embeddings',
-                              name='model-adapter',
-                              init_inputs={'model_entity': dl.Model})
 class BaseBedrockEmbeddingsAdapter(dl.BaseModelAdapter):
 
     def load(self, local_path, **kwargs):
@@ -25,8 +22,8 @@ class BaseBedrockEmbeddingsAdapter(dl.BaseModelAdapter):
 
         self.model_id = self.configuration.get("model_id")
         region = self.configuration.get("region")
-        if region is "":
-            raise ValueError("You must provide integrations on the model's configuration.")
+        if region == "":
+            raise ValueError("You must provide the region on the model's configuration.")
 
         self.client = boto3.client(service_name="bedrock-runtime",
                                    region_name=region,
