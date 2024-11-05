@@ -32,13 +32,3 @@ class ModelAdapter(BaseBedrockEmbeddingsAdapter):
             logger.warning(f"Multiple embedding types detected. Only the first type will be used: {embeddings_type[0]}")
 
         return embedding
-
-
-if __name__ == '__main__':
-    import dtlpy as dl
-
-    dl.setenv('rc')
-    model = dl.models.get(model_id="670e225de644847cce87990d")
-    item = dl.items.get(item_id="670e132e4ee2fe80fd68ab10")
-    a = ModelAdapter(model)
-    a.embed_items([item])
