@@ -54,7 +54,7 @@ class ModelAdapter(BaseBedrockCompletionAdapter):
 
         # Iterate through the messages and format the conversation history
         for message in messages:
-            for m in message["content"]:
+            for m in message.get("content"):
                 if "image" in m.get("type"):
                     m["type"] = "image"
                     m["image_url"] = {"type": "base64",

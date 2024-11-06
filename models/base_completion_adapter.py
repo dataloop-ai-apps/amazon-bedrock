@@ -21,8 +21,8 @@ class BaseBedrockCompletionAdapter(dl.BaseModelAdapter):
         logger.info("Loaded integrations")
 
         self.model_id = self.configuration.get("model_id")
-        region = self.configuration.get("region")
-        if region == "":
+        region = self.configuration.get("region", "")
+        if isinstance(region, str) and not region.strip():
             raise ValueError("You must provide the region on the model's configuration.")
 
         self.client = boto3.client(service_name="bedrock-runtime",

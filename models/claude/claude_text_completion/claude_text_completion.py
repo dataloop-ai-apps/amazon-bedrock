@@ -65,10 +65,11 @@ class ModelAdapter(BaseBedrockCompletionAdapter):
                 role = 'Human'
             else:
                 role = role.capitalize()
+            content = message.get("content")
+            if not isinstance(content, str):
+                content = content[0].get(content[0].get("type", "text"), "")
 
-            for content in message['content']:
-                if content['type'] == 'text':
-                    conversation_history += f"{role}: {content['text']}\n"
+            conversation_history += f"{role}: {content}\n"
 
         # Build the final inputText
         input_text = f"{system_prompt}\n\n{conversation_history}\n\nAssistant:"
