@@ -16,6 +16,11 @@
       "Multi Modal"
     ]
   },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
+    "gitTag": "0.0.1"
+  },
   "components": {
     "computeConfigs": [
       {
