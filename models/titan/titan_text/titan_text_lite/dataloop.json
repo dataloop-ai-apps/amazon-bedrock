@@ -1,7 +1,7 @@
 {
   "name": "bedrock-titan-text-lite",
   "displayName": "Titan Text Lite",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scope": "public",
   "description": "Amazon Bedrock - Titan Text Lite Model Application. This app provide accesses to AWS client and getting response from Titan Text models using your keys",
   "attributes": {
@@ -17,7 +17,7 @@
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.1"
+    "gitTag": "0.0.2"
   },
   "components": {
     "computeConfigs": [
