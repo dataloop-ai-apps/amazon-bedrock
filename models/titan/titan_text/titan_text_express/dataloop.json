@@ -1,0 +1,159 @@
+{
+  "name": "bedrock-titan-text-express",
+  "displayName": "Titan Text Express",
+  "version": "0.0.1",
+  "scope": "public",
+  "description": "Amazon Bedrock - Titan Text Express Model Application. This app provide accesses to AWS client and getting response from Titan Text models using your keys",
+  "attributes": {
+    "Provider": "AWS",
+    "Deployed By": "AWS",
+    "Category": "Model",
+    "NLP": "Conversational",
+    "Gen AI": "LLM",
+    "Media Type": [
+      "Text"
+    ]
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
+    "gitTag": "0.0.1"
+  },
+  "components": {
+    "computeConfigs": [
+      {
+        "name": "amazon-titan-text-express-service",
+        "runtime": {
+          "podType": "regular-s",
+          "concurrency": 1,
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/amazon-bedrock:0.0.1",
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 1,
+            "queueLength": 100
+          }
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "amazon-titan-text-express-module",
+        "entryPoint": "models/titan/titan_text/titan_text_adapter.py",
+        "className": "ModelAdapter",
+        "computeConfig": "amazon-titan-text-express-service",
+        "description": "Amazon Titan Text Express Module",
+        "integrations": [
+          "dl-aws-integration"
+        ],
+        "initInputs": [
+          {
+            "type": "Model",
+            "name": "model_entity"
+          }
+        ],
+        "functions": [
+          {
+            "name": "evaluate_model",
+            "input": [
+              {
+                "type": "Model",
+                "name": "model",
+                "description": "Dataloop Model Entity"
+              },
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "Dataloop Dataset Entity"
+              },
+              {
+                "type": "Json",
+                "name": "filters",
+                "description": "Dataloop Filter DQL"
+              }
+            ],
+            "output": [
+              {
+                "type": "Model",
+                "name": "model",
+                "description": "Dataloop Model Entity"
+              },
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "Dataloop Dataset Entity"
+              }
+            ],
+            "displayName": "Evaluate a Model",
+            "displayIcon": "",
+            "description": "Function to evaluate YoloX model performance"
+          },
+          {
+            "name": "predict_items",
+            "input": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "List of items to run inference on"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "The same input images for prediction."
+              },
+              {
+                "type": "Annotation[]",
+                "name": "annotations",
+                "description": "The predicted annotations."
+              }
+            ],
+            "displayName": "Predict Items",
+            "displayIcon": "",
+            "description": "Function to run YoloX inference on items"
+          },
+          {
+            "name": "predict_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": ""
+              },
+              {
+                "type": "Json",
+                "name": "filters",
+                "description": "Dataloop Filter DQL"
+              }
+            ],
+            "output": [
+            ],
+            "displayName": "Predict Dataset",
+            "displayIcon": "",
+            "description": "Function to run YoloX inference on a dataset"
+          }
+        ]
+      }
+    ],
+    "models": [
+      {
+        "name": "amazon-titan-text-express",
+        "moduleName": "amazon-titan-text-express-module",
+        "scope": "project",
+        "status": "pre-trained",
+        "configuration": {
+          "system_prompt": "You are a helpful and a bit cynical assistant. Give relevant and short answers, if you dont know the answer just say it, dont make up an answer",
+          "model_id": "amazon.titan-text-express-v1",
+          "region": "",
+          "max_tokens": 512,
+          "top_p": 0.9,
+          "temperature": 0.7,
+          "stop_sequences": [],
+          "stream": true
+        },
+        "description": "Bedrock call for Amazon Titan Text Express."
+      }
+    ]
+  }
+}

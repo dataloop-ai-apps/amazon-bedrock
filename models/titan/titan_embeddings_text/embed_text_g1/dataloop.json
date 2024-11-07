@@ -1,0 +1,119 @@
+{
+  "name": "bedrock-titan-embeddings-g1",
+  "displayName": "Titan Embed Text G1",
+  "version": "0.0.1",
+  "description": "Titan Embeddings Text G1 Models Application",
+  "scope": "public",
+  "attributes": {
+    "Provider": "AWS",
+    "Deployed By": "AWS",
+    "Category": "Model",
+    "NLP": "Embeddings",
+    "Media Type": [
+      "Text"
+    ]
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
+    "gitTag": "0.0.1"
+  },
+  "components": {
+    "computeConfigs": [
+      {
+        "name": "text-embeddings-g1-deploy",
+        "runtime": {
+          "podType": "regular-xs",
+          "concurrency": 1,
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/amazon-bedrock:0.0.1",
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 2
+          }
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "titan-embed-text-g1-module",
+        "entryPoint": "models/titan/titan_embeddings_text/titan_embeddings_adapter.py",
+        "className": "ModelAdapter",
+        "computeConfig": "text-embeddings-g1-deploy",
+        "description": "Titan Embeddings Text G1 Module",
+        "integrations": [
+          "dl-aws-integration"
+        ],
+        "initInputs": [
+          {
+            "type": "Model",
+            "name": "model_entity"
+          }
+        ],
+        "functions": [
+          {
+            "name": "embed_items",
+            "input": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "The input items for embeddings."
+              }
+            ],
+            "output": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "The same input items for embeddings."
+              },
+              {
+                "type": "Json",
+                "name": "json",
+                "description": "Embeddings of items."
+              }
+            ],
+            "displayName": "Embed Items",
+            "displayIcon": "",
+            "description": "The inference function of the model."
+          },
+          {
+            "name": "embed_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "The input dataset of the items required for prediction."
+              },
+              {
+                "type": "Json",
+                "name": "filters",
+                "description": "The DQL in json format to get all the items required for prediction."
+              }
+            ],
+            "output": [],
+            "displayName": "Embed Dataset",
+            "displayIcon": "",
+            "description": "Inference function of the model on a dataset."
+          }
+        ]
+      }
+    ],
+    "models": [
+      {
+        "name": "titan-embed-text-g1",
+        "moduleName": "titan-embed-text-g1-module",
+        "scope": "project",
+        "status": "pre-trained",
+        "inputType": "text",
+        "configuration": {
+          "model_id": "amazon.titan-embed-text-v1",
+          "region": "",
+          "embedding_types": "float",
+          "normalize": true,
+          "dimensions": 1024
+        },
+        "description": "Bedrock call for Amazon Titan Embeddings G1."
+      }
+    ]
+  }
+}

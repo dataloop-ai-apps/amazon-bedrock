@@ -1,0 +1,119 @@
+{
+  "name": "bedrock-cohere-english-embeddings",
+  "displayName": "Embed English",
+  "version": "0.0.1",
+  "description": "Cohere Embed models Application",
+  "scope": "public",
+  "attributes": {
+    "Provider": "Cohere",
+    "Deployed By": "AWS",
+    "Category": "Model",
+    "NLP": "Embeddings",
+    "Media Type": [
+      "Text"
+    ]
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
+    "gitTag": "0.0.1"
+  },
+  "components": {
+    "computeConfigs": [
+      {
+        "name": "cohere-embeddings-english-deploy",
+        "runtime": {
+          "podType": "regular-xs",
+          "concurrency": 1,
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/amazon-bedrock:0.0.1",
+          "autoscaler": {
+            "type": "rabbitmq",
+            "minReplicas": 0,
+            "maxReplicas": 2
+          }
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "cohere-embed-english-module",
+        "entryPoint": "models/cohere/embedding_models/cohere_embeddings_adapter.py",
+        "className": "ModelAdapter",
+        "computeConfig": "cohere-embeddings-english-deploy",
+        "description": "Cohere Embed English Module",
+        "integrations": [
+          "dl-aws-integration"
+        ],
+        "initInputs": [
+          {
+            "type": "Model",
+            "name": "model_entity"
+          }
+        ],
+        "functions": [
+          {
+            "name": "embed_items",
+            "input": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "The input items for embeddings."
+              }
+            ],
+            "output": [
+              {
+                "type": "Item[]",
+                "name": "items",
+                "description": "The same input items for embeddings."
+              },
+              {
+                "type": "Json",
+                "name": "json",
+                "description": "Embeddings of items."
+              }
+            ],
+            "displayName": "Embed Items",
+            "displayIcon": "",
+            "description": "The inference function of the model."
+          },
+          {
+            "name": "embed_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset",
+                "description": "The input dataset of the items required for prediction."
+              },
+              {
+                "type": "Json",
+                "name": "filters",
+                "description": "The DQL in json format to get all the items required for prediction."
+              }
+            ],
+            "output": [],
+            "displayName": "Embed Dataset",
+            "displayIcon": "",
+            "description": "Inference function of the model on a dataset."
+          }
+        ]
+      }
+    ],
+    "models": [
+      {
+        "name": "cohere-embed-english-v3",
+        "moduleName": "cohere-embed-english-module",
+        "scope": "project",
+        "status": "pre-trained",
+        "inputType": "text",
+        "configuration": {
+          "model_id": "cohere.embed-english-v3",
+          "region": "",
+          "embedding_types": "float",
+          "input_type": "search_query",
+          "truncate": "END"
+        },
+        "description": "Bedrock call for Cohere Embed English."
+      }
+    ]
+  }
+}
