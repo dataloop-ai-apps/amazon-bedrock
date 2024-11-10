@@ -140,7 +140,7 @@
     ],
     "models": [
       {
-        "name": "anthropic.claude-3-haiku-20240307-v1:0",
+        "name": "anthropic-claude-haiku-3",
         "moduleName": "claude-haiku-module",
         "scope": "project",
         "status": "pre-trained",
