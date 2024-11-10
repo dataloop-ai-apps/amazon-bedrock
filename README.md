@@ -66,7 +66,7 @@ Available models:
 
 ### Installation - MarketPlace
 
-Install the models from MarketPlace:
+Install the models from MarketPlace.
 
 ### Editing the configuration
 
