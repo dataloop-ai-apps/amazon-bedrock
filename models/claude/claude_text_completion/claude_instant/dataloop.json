@@ -5,7 +5,7 @@
   "scope": "public",
   "description": "Amazon Bedrock - Claude Instant Model Application. This app enables AWS clients to access and interact with the Claude Instant model using their API keys, providing fast and efficient AI-generated text responses.",
   "attributes": {
-    "Provider": "",
+    "Provider": "Anthropic",
     "Deployed By": "AWS",
     "Category": "Model",
     "NLP": "Conversational",

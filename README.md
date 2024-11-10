@@ -68,6 +68,8 @@ Available models:
 
 Install the models from MarketPlace.
 
+**Ensure that you update the model's configuration. Specifying the AWS Region is mandatory for proper deployment and functionality.**
+
 ### Editing the configuration
 
 All models are created with basic configurations. To edit configurations via the platform, go to the model page in the Model Management and edit the config.
