@@ -38,7 +38,7 @@
     ],
     "modules": [
       {
-        "name": "bedrock-claude-module",
+        "name": "bedrock-claude-v2-module",
         "entryPoint": "models/claude/claude_text_completion/claude_text_completion.py",
         "className": "ModelAdapter",
         "computeConfig": "bedrock-claude-v2-service",
