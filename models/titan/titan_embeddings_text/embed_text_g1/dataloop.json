@@ -1,7 +1,7 @@
 {
   "name": "bedrock-titan-embeddings-g1",
   "displayName": "Titan Embed Text G1",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Titan Embeddings Text G1 Models Application",
   "scope": "public",
   "attributes": {
@@ -16,7 +16,7 @@
   "codebase": {
     "type": "git",
     "gitUrl": "https://github.com/dataloop-ai-apps/amazon-bedrock.git",
-    "gitTag": "0.0.2"
+    "gitTag": "0.0.3"
   },
   "components": {
     "computeConfigs": [
