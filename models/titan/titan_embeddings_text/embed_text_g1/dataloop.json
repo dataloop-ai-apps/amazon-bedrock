@@ -9,9 +9,7 @@
     "Deployed By": "AWS",
     "Category": "Model",
     "NLP": "Embeddings",
-    "Media Type": [
-      "Text"
-    ]
+    "Media Type": ["Text"]
   },
   "codebase": {
     "type": "git",
@@ -25,7 +23,7 @@
         "runtime": {
           "podType": "regular-xs",
           "concurrency": 1,
-          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/amazon-bedrock:0.0.1",
+          "runnerImage": "gcr.io/viewo-g/piper/agent/runner/apps/amazon-bedrock:0.1.0",
           "autoscaler": {
             "type": "rabbitmq",
             "minReplicas": 0,
@@ -41,9 +39,7 @@
         "className": "ModelAdapter",
         "computeConfig": "text-embeddings-g1-deploy",
         "description": "Titan Embeddings Text G1 Module",
-        "integrations": [
-          "dl-aws-integration"
-        ],
+        "integrations": ["dl-aws-integration"],
         "initInputs": [
           {
             "type": "Model",
