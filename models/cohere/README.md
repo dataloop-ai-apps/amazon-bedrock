@@ -1,4 +1,4 @@
-# Cohere Embeddings Models served by Amazon Bedrock in Dataloop Platform
+# Cohere Embeddings Models served by Amazon Bedrock in DDOE Platform
 
 ## Overview
 

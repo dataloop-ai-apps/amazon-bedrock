@@ -14,9 +14,9 @@ Generation (RAG).
 
 This repo is an integration
 between [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
-models and [Dataloop](https://dataloop.ai/).
+models and [DDOE](https://dataloop.ai/).
 
-The Applications provide accesses to AWS Bedrock models, using the AWS SDK for Python (Boto3), as Dataloop model.
+The Applications provide accesses to AWS Bedrock models, using the AWS SDK for Python (Boto3), as DDOE model.
 
 Available models:
 
@@ -45,7 +45,7 @@ Available models:
   image, and other media inputs to provide richer, context-aware outputs for complex tasks across various domains.
   [Claude MultiModel](models/claude/README.md)
 
-### Create Integration in Dataloop Platform:
+### Create Integration in DDOE Platform:
 
 1. Navigate to Data Governance Tab:
 
