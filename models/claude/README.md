@@ -1,4 +1,4 @@
-# Claude Models served by Amazon Bedrock in Dataloop Platform
+# Claude Models served by Amazon Bedrock in DDOE Platform
 
 ## Overview
 

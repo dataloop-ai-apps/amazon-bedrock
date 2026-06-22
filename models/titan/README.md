@@ -1,4 +1,4 @@
-# Amazon Titan Models served by Amazon Bedrock in Dataloop Platform
+# Amazon Titan Models served by Amazon Bedrock in DDOE Platform
 
 ## Overview
 
